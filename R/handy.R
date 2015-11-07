@@ -118,3 +118,19 @@ getgc <- function(seq)
 	gc
 }
 # -------------------------------------------------------------------
+
+# --------------------------------------------------------------------
+# print recursive summary of a list with nested lists (list of lists)
+nsummary <- function(mylist,level=1)
+{
+	cla <- sapply(mylist,class)
+	for(i in 1:length(mylist))
+	{
+		print(paste0(paste(rep("-> ",level),collapse=""),"[[",i,"]] '",names(mylist)[i],"' (",cla[i],")"))
+		if(cla[i]=="list")
+		{
+			nsummary(mylist[[i]],level=level+1)
+		}
+	}
+}
+# --------------------------------------------------------------------
